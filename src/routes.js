@@ -3,6 +3,7 @@ const routes = express.Router()
 
 const CarroControllers = require('./controllers/carroControllers')
 
-routes.get('/carro', CarroControllers.buscarTodos)
+routes.get('/carros', CarroControllers.buscarTodos)
+routes.get('/carro/:codigo', CarroControllers.buscarUm)
 
 module.exports = routes
