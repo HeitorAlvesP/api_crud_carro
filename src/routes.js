@@ -7,5 +7,6 @@ routes.get('/carros', CarroControllers.buscarTodos)
 routes.get('/carro/:codigo', CarroControllers.buscarUm)
 routes.post('/carro', CarroControllers.inserir)
 routes.put('/carro/:codigo', CarroControllers.alterar)
+routes.delete('/carro/:codigo', CarroControllers.delete)
 
 module.exports = routes

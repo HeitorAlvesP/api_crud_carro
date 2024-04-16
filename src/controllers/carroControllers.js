@@ -74,4 +74,11 @@ module.exports = {
         res.json(json)
     },
 
+    delete : async(req, res) => {
+        let json = {error: '', result: {}}
+        await CarroServices.delete(req.params.codigo)
+
+        res.json(json)
+    }
+
 }
