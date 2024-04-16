@@ -4,7 +4,7 @@ module.exports = {
 
 
     buscarTodos: async (req, res) => {
-        let json = {error: '', result:[]}
+        let json = {error: '', result: []}
 
         let carros = await CarroServices.buscarTodos()
 
@@ -26,8 +26,12 @@ module.exports = {
 
         if(carro){
             json.result = carro
+            res.json(json.result)
         }
-        res.json(json)
+        else{
+            json.error = `Carro, ID= ${codigo}, não foi encontrado`
+            res.status(404).json(json.error)
+        }
     },
 
 
@@ -48,5 +52,26 @@ module.exports = {
             json.error = 'Campos não enviados'
         }
         res.json(json)
-    }
+    },
+
+    alterar: async (req, res) => {
+        let json = {error: '', result: {}}
+
+        let modelo = req.body.modelo
+        let placa = req.body.placa
+        let codigo = req.params.codigo
+        
+        if(modelo && placa && codigo){
+            await CarroServices.alterar(modelo, placa, codigo)
+            json.result = {
+                codigo,
+                modelo,
+                placa
+            }
+        }else{ 
+            json.error = 'Campos não enviados'
+        }
+        res.json(json)
+    },
+
 }
